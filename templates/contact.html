@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Contact Experts</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #4A90E2, #56CCF2);
+            padding: 20px;
+            overflow-y: auto; /* Make page scrollable */
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #8e44ad;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #ecf0f1;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Agricultural Experts</h1>
+    <ul>
+        {% for expert in experts %}
+            <li><strong>{{ expert.name }}</strong> - {{ expert.phone }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

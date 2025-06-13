@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Crops</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 28px;
+        }
+
+        /* Crops Container */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+            max-width: 80%;
+            margin: auto;
+        }
+
+        /* Crop Buttons */
+        .crop-button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+
+        .crop-button:hover {
+            background-color: #218838;
+            transform: scale(1.1);
+        }
+
+        /* Search Box */
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        #search-box {
+            padding: 10px;
+            font-size: 16px;
+            width: 250px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        /* Checkbox Styling */
+        .checkbox-container {
+            margin-top: 20px;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        label {
+            font-size: 18px;
+            margin-left: 8px;
+            color: #555;
+        }
+
+        /* Crop Details Box */
+        #cropDetails {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            display: none;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+            border-radius: 10px;
+        }
+
+        /* Crop Image */
+        #cropImage {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        function filterCrops() {
+            let searchQuery = document.getElementById("search-box").value.toLowerCase();
+            let buttons = document.getElementsByClassName("crop-button");
+
+            for (let btn of buttons) {
+                if (btn.innerText.toLowerCase().includes(searchQuery)) {
+                    btn.style.display = "inline-block";
+                } else {
+                    btn.style.display = "none";
+                }
+            }
+        }
+
+        function toggleVisibility() {
+            let isChecked = document.getElementById("filter").checked;
+            let fruitList = ["Apple", "Banana", "Grapes", "Mango", "Orange", "Papaya", "Pomegranate", "Watermelon", "Muskmelon"];
+            let buttons = document.getElementsByClassName("crop-button");
+
+            for (let btn of buttons) {
+                if (isChecked && !fruitList.includes(btn.innerText)) {
+                    btn.style.display = "none";
+                } else {
+                    btn.style.display = "inline-block";
+                }
+            }
+        }
+
+        function fetchCropDetails(crop) {
+            fetch('/get_crop_details', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ "crop": crop })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("cropDetails").style.display = "block";
+                document.getElementById("cropDetails").innerHTML = `
+                    <img id="cropImage" src="/static/images/${crop.toLowerCase()}.jpg" alt="${crop} Image">
+                    <h2>${crop.toUpperCase()}</h2>
+                    <p><strong>Growth Stages:</strong> ${data.growthStages || "Not Available"}</p>
+                    <p><strong>Fertilizer:</strong> ${data.fertilizer || "Not Available"}</p>
+                    <p><strong>Soil Type:</strong> ${data.idealConditions?.soilType || "Unknown"}</p>
+                `;
+            })
+            .catch(error => {
+                console.error("Error fetching crop details:", error);
+                document.getElementById("cropDetails").innerHTML = "<p>Error fetching details. Please try again.</p>";
+                document.getElementById("cropDetails").style.display = "block";
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <h1>About Crops</h1>
+
+    <!-- Search Box -->
+    <div class="search-container">
+        <input type="text" id="search-box" placeholder="Search for a crop..." onkeyup="filterCrops()">
+    </div>
+
+    <!-- Crops Container -->
+    <div class="container" id="crop-container">
+        <button class="crop-button" onclick="fetchCropDetails('Apple')">Apple</button>
+        <button class="crop-button" onclick="fetchCropDetails('Banana')">Banana</button>
+        <button class="crop-button" onclick="fetchCropDetails('Blackgram')">Blackgram</button>
+        <button class="crop-button" onclick="fetchCropDetails('Chickpea')">Chickpea</button>
+        <button class="crop-button" onclick="fetchCropDetails('Coconut')">Coconut</button>
+        <button class="crop-button" onclick="fetchCropDetails('Coffee')">Coffee</button>
+        <button class="crop-button" onclick="fetchCropDetails('Cotton')">Cotton</button>
+        <button class="crop-button" onclick="fetchCropDetails('Grapes')">Grapes</button>
+        <button class="crop-button" onclick="fetchCropDetails('Jute')">Jute</button>
+        <button class="crop-button" onclick="fetchCropDetails('Kidneybeans')">Kidneybeans</button>
+        <button class="crop-button" onclick="fetchCropDetails('Lentil')">Lentil</button>
+        <button class="crop-button" onclick="fetchCropDetails('Maize')">Maize</button>
+        <button class="crop-button" onclick="fetchCropDetails('Mango')">Mango</button>
+        <button class="crop-button" onclick="fetchCropDetails('Watermelon')">Watermelon</button>
+        <button class="crop-button" onclick="fetchCropDetails('Mothbeans')">Mothbeans</button>
+        <button class="crop-button" onclick="fetchCropDetails('Mungbean')">Mungbean</button>
+        <button class="crop-button" onclick="fetchCropDetails('Muskmelon')">Muskmelon</button>
+        <button class="crop-button" onclick="fetchCropDetails('Orange')">Orange</button>
+        <button class="crop-button" onclick="fetchCropDetails('Papaya')">Papaya</button>
+        <button class="crop-button" onclick="fetchCropDetails('Pigeonpeas')">Pigeonpeas</button>
+        <button class="crop-button" onclick="fetchCropDetails('Pomegranate')">Pomegranate</button>
+        <button class="crop-button" onclick="fetchCropDetails('Rice')">Rice</button>
+    </div>
+
+    <!-- Checkbox Container -->
+    <div class="checkbox-container">
+        <input type="checkbox" id="filter" onclick="toggleVisibility()">
+        <label for="filter">Show Only Fruits</label>
+    </div>
+
+    <!-- Crop Details Box -->
+    <div id="cropDetails"></div>
+
+</body>
+</html>

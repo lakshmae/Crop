@@ -1,0 +1,212 @@
+{
+    "apple": {
+        "growthStages": ["Germination", "Vegetative", "Flowering", "Fruiting", "Harvesting"],
+        "fertilizer": "NPK 10:10:10, Organic compost",
+        "idealConditions": {
+            "soilType": "Loamy",
+            "temperature": "18-24°C",
+            "rainfall": "100-125 cm"
+        }
+    },
+    "banana": {
+        "growthStages": ["Sowing", "Vegetative", "Flowering", "Fruiting", "Harvesting"],
+        "fertilizer": "NPK 3:1:6, Organic manure",
+        "idealConditions": {
+            "soilType": "Alluvial, Loamy",
+            "temperature": "26-30°C",
+            "humidity": "60-80%",
+            "soilPh": "5.5-7.0",
+            "rainfall": "150-200 cm"
+        }
+    },
+    "blackgram": {
+        "growthStages": ["Sowing", "Vegetative", "Flowering", "Pod Formation", "Harvesting"],
+        "fertilizer": "DAP, Urea, Potash",
+        "idealConditions": {
+            "soilType": "Loamy, Clayey",
+            "temperature": "25-35°C",
+            "rainfall": "60-75 cm"
+        }
+    },
+    "chickpea": {
+        "growthStages": ["Sowing", "Vegetative", "Flowering", "Pod Formation", "Harvesting"],
+        "fertilizer": "Phosphorus-rich fertilizers",
+        "idealConditions": {
+            "soilType": "Loamy, Sandy Loam",
+            "temperature": "15-25°C",
+            "rainfall": "40-50 cm"
+        }
+    },
+    "coconut": {
+        "growthStages": ["Planting", "Vegetative", "Flowering", "Nut Development", "Harvesting"],
+        "fertilizer": "NPK 10:10:30, Organic manure",
+        "idealConditions": {
+            "soilType": "Sandy, Loamy",
+            "temperature": "27-30°C",
+            "rainfall": "150-250 cm"
+        }
+    },
+    "coffee": {
+        "growthStages": ["Seedling", "Vegetative", "Flowering", "Berry Development", "Harvesting"],
+        "fertilizer": "NPK 15:5:20, Organic compost",
+        "idealConditions": {
+            "soilType": "Volcanic, Loamy",
+            "temperature": "15-25°C",
+            "rainfall": "150-250 cm"
+        }
+    },
+    "cotton": {
+        "growthStages": ["Sowing", "Seedling", "Vegetative", "Flowering", "Boll Formation", "Harvesting"],
+        "fertilizer": "NPK 6:12:12, Organic manure",
+        "idealConditions": {
+            "soilType": "Black, Loamy",
+            "temperature": "21-30°C",
+            "rainfall": "50-100 cm"
+        }
+    },
+    "grapes": {
+        "growthStages": ["Budburst", "Vegetative", "Flowering", "Fruit Development", "Harvesting"],
+        "fertilizer": "NPK 10:10:30, Micronutrients",
+        "idealConditions": {
+            "soilType": "Well-drained Loamy",
+            "temperature": "15-30°C",
+            "rainfall": "50-75 cm"
+        }
+    },
+    "jute": {
+        "growthStages": ["Sowing", "Vegetative", "Flowering", "Fiber Development", "Harvesting"],
+        "fertilizer": "Urea, DAP, Potash",
+        "idealConditions": {
+            "soilType": "Loamy, Clayey",
+            "temperature": "25-35°C",
+            "rainfall": "150-200 cm"
+        }
+    },
+    "kidneybeans": {
+        "growthStages": ["Sowing", "Vegetative", "Flowering", "Pod Formation", "Harvesting"],
+        "fertilizer": "NPK 20:10:10, Organic manure",
+        "idealConditions": {
+            "soilType": "Loamy, Sandy Loam",
+            "temperature": "15-25°C",
+            "rainfall": "60-80 cm"
+        }
+    },
+    "lentil": {
+        "growthStages": ["Sowing", "Vegetative", "Flowering", "Pod Formation", "Harvesting"],
+        "fertilizer": "Phosphorus-rich fertilizers",
+        "idealConditions": {
+            "soilType": "Loamy, Clayey",
+            "temperature": "15-25°C",
+            "rainfall": "30-50 cm"
+        }
+    },
+    "maize": {
+        "growthStages": ["Germination", "Vegetative", "Flowering", "Grain Filling", "Harvesting"],
+        "fertilizer": "NPK 10:20:10, Organic manure",
+        "idealConditions": {
+            "soilType": "Well-drained Loamy",
+            "temperature": "18-30°C",
+            "rainfall": "50-100 cm"
+        }
+    },
+    "mango": {
+        "growthStages": ["Seedling", "Vegetative", "Flowering", "Fruit Development", "Harvesting"],
+        "fertilizer": "NPK 10:10:20, Organic compost",
+        "idealConditions": {
+            "soilType": "Loamy, Sandy Loam",
+            "temperature": "25-35°C",
+            "rainfall": "75-250 cm"
+        }
+    },
+    "watermelon": {
+        "growthStages": ["Sowing", "Vegetative", "Flowering", "Fruit Development", "Harvesting"],
+        "fertilizer": "NPK 8:24:16, Organic manure",
+        "idealConditions": {
+            "soilType": "Sandy Loam",
+            "temperature": "22-30°C",
+            "rainfall": "40-50 cm"
+        }
+    },
+
+
+    "mothbeans": {
+        "growthStages": ["Sowing", "Vegetative", "Flowering", "Pod Formation", "Harvesting"],
+        "fertilizer": "NPK 20:40:20, Organic Manure",
+        "idealConditions": {
+            "soilType": "Sandy Loam",
+            "temperature": "25-35°C",
+            "rainfall": "40-50 cm",
+            "soilPh": "7.0-8.5"
+        }
+    },
+    "mungbean": {
+        "growthStages": ["Sowing", "Seedling", "Flowering", "Pod Formation", "Harvesting"],
+        "fertilizer": "NPK 20:40:20, Farmyard Manure",
+        "idealConditions": {
+            "soilType": "Loamy, Sandy Loam",
+            "temperature": "25-35°C",
+            "rainfall": "50-75 cm",
+            "soilPh": "6.0-7.5"
+        }
+    },
+    "muskmelon": {
+        "growthStages": ["Germination", "Vegetative", "Flowering", "Fruit Development", "Harvesting"],
+        "fertilizer": "NPK 5:10:10, Compost",
+        "idealConditions": {
+            "soilType": "Sandy Loam",
+            "temperature": "25-35°C",
+            "rainfall": "50-60 cm",
+            "soilPh": "6.0-7.5"
+        }
+    },
+    "orange": {
+        "growthStages": ["Planting", "Vegetative", "Flowering", "Fruit Set", "Maturity"],
+        "fertilizer": "NPK 15:15:15, Organic Manure",
+        "idealConditions": {
+            "soilType": "Loamy, Well-drained",
+            "temperature": "15-30°C",
+            "rainfall": "75-125 cm",
+            "soilPh": "5.5-6.5"
+        }
+    },
+    "papaya": {
+        "growthStages": ["Seedling", "Vegetative", "Flowering", "Fruiting", "Harvesting"],
+        "fertilizer": "NPK 10:10:10, Compost",
+        "idealConditions": {
+            "soilType": "Sandy Loam, Well-drained",
+            "temperature": "25-30°C",
+            "rainfall": "100-150 cm",
+            "soilPh": "6.0-7.0"
+        }
+    },
+    "pigeonpeas": {
+        "growthStages": ["Sowing", "Vegetative", "Flowering", "Pod Formation", "Harvesting"],
+        "fertilizer": "NPK 20:40:20, Farmyard Manure",
+        "idealConditions": {
+            "soilType": "Loamy, Sandy Loam",
+            "temperature": "20-35°C",
+            "rainfall": "60-90 cm",
+            "soilPh": "6.0-7.5"
+        }
+    },
+    "pomegranate": {
+        "growthStages": ["Planting", "Vegetative", "Flowering", "Fruit Development", "Harvesting"],
+        "fertilizer": "NPK 10:10:10, Organic Manure",
+        "idealConditions": {
+            "soilType": "Sandy Loam, Well-drained",
+            "temperature": "25-35°C",
+            "rainfall": "50-75 cm",
+            "soilPh": "6.0-7.0"
+        }
+    },
+    "rice": {
+        "growthStages": ["Sowing", "Vegetative", "Tillering", "Flowering", "Maturity"],
+        "fertilizer": "NPK 20:20:20, Organic Manure",
+        "idealConditions": {
+            "soilType": "Clayey, Loamy",
+            "temperature": "20-35°C",
+            "rainfall": "100-150 cm",
+            "soilPh": "5.0-6.5"
+        }
+    }
+}

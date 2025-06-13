@@ -1,0 +1,365 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Recommendation System</title>
+    <style>
+        :root {
+            --primary-color: #676c6ce4;
+            --primary-dark: #676c6ce4;
+            --primary-light: #e6f1ed;
+            --secondary-color: #f3f4f6;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #66e8a7, #8ecce5);
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+
+        .navbar {
+            background-color: var(--primary-dark);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            color: var(--text-dark);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            background: var(--secondary-color);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            border: 1px solid #e5e7eb;
+            transition: var(--transition);
+        }
+
+        .input-group:hover {
+            border-color: var(--primary-color);
+        }
+
+        .input-group label {
+            display: block;
+            color: var(--text-dark);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .result {
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .result.active {
+            display: block;
+        }
+
+        .crop-image {
+            width: 50%;
+            height: 300px;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            
+            /* Centering */
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .result-content {
+            background: var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+        }
+
+        .result-content h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .result-content h3 {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .result-content p {
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v8"/>
+                    <path d="M12 14c0 3-2 4-2 4"/>
+                    <path d="M12 14c0 3 2 4 2 4"/>
+                    <path d="M6 4c0 1.5.5 2 2 3"/>
+                    <path d="M18 4c0 1.5-.5 2-2 3"/>
+                </svg>
+                CropAI
+            </a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+                <a href="/search">Search</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h1>Crop Recommendation System</h1>
+            </div>
+
+            <form id="cropForm" onsubmit="return false;">
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label for="N">Nitrogen (N)</label>
+                        <input type="number" id="N" name="N" min="0" max="140" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="P">Phosphorus (P)</label>
+                        <input type="number" id="P" name="P" min="5" max="145" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="K">Potassium (K)</label>
+                        <input type="number" id="K" name="K" min="5" max="205" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="temperature">Temperature (°C)</label>
+                        <input type="number" id="temperature" name="temperature" min="8" max="43" step="0.1" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="humidity">Humidity (%)</label>
+                        <input type="number" id="humidity" name="humidity" min="14" max="100" step="0.1" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="ph">pH Level</label>
+                        <input type="number" id="ph" name="ph" min="3.5" max="9.9" step="0.1" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="rainfall">Rainfall (mm)</label>
+                        <input type="number" id="rainfall" name="rainfall" min="20" max="300" step="0.1" required>
+                    </div>
+                </div>
+            
+                <button type="submit" class="submit-btn" onclick="validateForm(event)">Predict Crop</button>
+            </form>
+            
+
+            <div id="result" class="result">
+                <img id="cropImage" class="crop-image" alt="Recommended crop">
+                <div class="result-content">
+                    <h2 id="cropName"></h2>
+                    <h3>Growth Stages</h3>
+                    <p id="growthStages"></p>
+                    <h3>Recommended Fertilizer</h3>
+                    <p id="fertilizer"></p>
+                    <h3>Suitable Soil Type</h3>
+                    <p id="soilType"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validateForm(event) {
+            event.preventDefault(); // Prevent form from submitting
+    
+            // Fetch values
+            const N = parseFloat(document.getElementById('N').value);
+            const P = parseFloat(document.getElementById('P').value);
+            const K = parseFloat(document.getElementById('K').value);
+            const temperature = parseFloat(document.getElementById('temperature').value);
+            const humidity = parseFloat(document.getElementById('humidity').value);
+            const ph = parseFloat(document.getElementById('ph').value);
+            const rainfall = parseFloat(document.getElementById('rainfall').value);
+    
+            // Check limits
+            if (N < 0 || N > 140) {
+                alert("Nitrogen (N) must be between 0 and 140");
+                return;
+            }
+            if (P < 5 || P > 145) {
+                alert("Phosphorus (P) must be between 5 and 145");
+                return;
+            }
+            if (K < 5 || K > 205) {
+                alert("Potassium (K) must be between 5 and 205");
+                return;
+            }
+            if (temperature < 8 || temperature > 43) {
+                alert("Temperature must be between 8°C and 43°C");
+                return;
+            }
+            if (humidity < 14 || humidity > 100) {
+                alert("Humidity must be between 14% and 100%");
+                return;
+            }
+            if (ph < 3.5 || ph > 9.9) {
+                alert("pH must be between 3.5 and 9.9");
+                return;
+            }
+            if (rainfall < 20 || rainfall > 300) {
+                alert("Rainfall must be between 20mm and 300mm");
+                return;
+            }
+    
+            // If all inputs are valid, now call your prediction
+            const formData = {
+                N, P, K, temperature, humidity, ph, rainfall
+            };
+    
+            // Simulate API call (replace with actual endpoint)
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').classList.add('active');
+                document.getElementById('cropImage').src = data.image;
+                document.getElementById('cropName').textContent = `Recommended Crop: ${data.crop}`;
+                document.getElementById('growthStages').textContent = data.growth_stages.join(', ');
+                document.getElementById('fertilizer').textContent = data.fertilizer;
+                document.getElementById('soilType').textContent = data.soil_type;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while processing your request.');
+            });
+        }
+    </script>
+    
+</body>
+</html>

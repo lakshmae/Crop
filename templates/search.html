@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Search Crops</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #4A90E2, #56CCF2);
+            padding: 20px;
+            overflow-y: auto; /* Make page scrollable */
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        input {
+            padding: 8px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #searchResults {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            display: inline-block;
+        }
+    </style>
+    <script>
+        function searchCrop() {
+            let crop = document.getElementById("cropInput").value.toLowerCase();
+            fetch('/get_crop_details', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ "crop": crop })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("searchResults").innerHTML = `
+                    <h2>${crop.toUpperCase()}</h2>
+                    <p><strong>Growth Stages:</strong> ${data.growthStages || "Not Available"}</p>
+                    <p><strong>Fertilizer:</strong> ${data.fertilizer || "Not Available"}</p>
+                    <p><strong>Soil Type:</strong> ${data.idealConditions?.soilType || "Unknown"}</p>
+                `;
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Search Crop Details</h1>
+    <input type="text" id="cropInput" placeholder="Enter crop name">
+    <button onclick="searchCrop()">Search</button>
+    <div id="searchResults"></div>
+</body>
+</html>
